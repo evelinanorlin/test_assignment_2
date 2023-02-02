@@ -14,7 +14,7 @@ beforeEach(() => {
   document.body.innerHTML = "";
 })
 
-describe("init", () => {
+// describe("init", () => {
 
   test("should run function handleSubmit on submit", () => {
     // Arrange
@@ -24,23 +24,23 @@ describe("init", () => {
     <button type="submit" id="search">Sök</button>
     </form>`;
     
-    let spyOnHandleSubmit = jest.spyOn(movieApp, "handleSubmit").mockReturnValue(new Promise<void>((reject) => {
-      reject()
+    let spyOnHandleSubmit = jest.spyOn(movieApp, "handleSubmit").mockReturnValue(new Promise<void>((resolve) => {
+      resolve();
     })
     );
     
     // Act
     movieApp.init();
 
-    let form = document.getElementById("searchForm") as HTMLFormElement;
-    form.submit();
+    let submitForm = document.getElementById("searchForm") as HTMLFormElement;
+    submitForm.submit();
     
     //Assert
     expect(spyOnHandleSubmit).toHaveBeenCalledTimes(1);
     
     spyOnHandleSubmit.mockRestore();
   })
-})
+
 
 // export const init = () => {
 //   let form = document.getElementById("searchForm") as HTMLFormElement;
@@ -173,3 +173,4 @@ describe("displayNoResult", () => {
     expect(container.innerHTML).toContain(message)
   })
 })
+
